@@ -1,4 +1,4 @@
-# Ecommerce API
+# AV Patient Manager
 
 Repositorio de nuestra RESTful API del E-Commerce. Diseñada con:
 
@@ -30,14 +30,75 @@ Arquitectura familiarizada por Robert C. Martin. Es una forma de organizar nuest
 
 <br>
 
-## 🚀 Getting Started
-
-### Opción 1: Localmente
-
-Clonar repositorio de GitHub:
-
-```
-    git clone https://github.com/davidcicconi/Ecommerce.API.git
-```
-
-Ejecutar `npm install` para instalar las dependencias.
+src/
+│
+├── domain/ # Reglas de negocio (núcleo)
+│ ├── entities/
+│ │ ├── User.ts
+│ │ └── Product.ts
+│ │
+│ ├── repositories/
+│ │ ├── IUserRepository.ts
+│ │ └── IProductRepository.ts
+│ │
+│ ├── valueObjects/
+│ │
+│ ├── enums/
+│ │
+│ └── errors/
+│
+├── application/ # Casos de uso
+│ ├── use-cases/
+│ │ ├── users/
+│ │ │ ├── CreateUserUseCase.ts
+│ │ │ ├── UpdateUserUseCase.ts
+│ │ │ └── DeleteUserUseCase.ts
+│ │ │
+│ │ └── products/
+│ │
+│ ├── dto/
+│ │
+│ ├── mappers/
+│ │
+│ └── services/
+│
+├── infrastructure/ # Implementaciones
+│ ├── database/
+│ │ ├── datasource.ts
+│ │ ├── migrations/
+│ │ └── entities/
+│ │
+│ ├── repositories/
+│ │ ├── UserRepository.ts
+│ │ └── ProductRepository.ts
+│ │
+│ ├── providers/
+│ │ ├── JwtProvider.ts
+│ │ ├── HashProvider.ts
+│ │ └── MailProvider.ts
+│ │
+│ └── config/
+│
+├── presentation/ # Entrada de la aplicación
+│ ├── controllers/
+│ │
+│ ├── routes/
+│ │
+│ ├── middlewares/
+│ │
+│ ├── validators/
+│ │
+│ └── responses/
+│
+├── shared/
+│ ├── utils/
+│ ├── constants/
+│ ├── logger/
+│ ├── errors/
+│ └── types/
+│
+├── container/ # Inyección de dependencias
+│ └── index.ts
+│
+├── app.ts # Configuración de Express
+└── server.ts # Inicio del servidor
