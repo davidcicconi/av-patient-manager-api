@@ -1,5 +1,5 @@
 {
-  "name": "ecommerce.api",
+  "name": "av-patient-manager-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
@@ -12,16 +12,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davidcicconi/Ecommerce.API.git"
+    "url": "git+https://github.com/davidcicconi/av-patient-manager.api.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/davidcicconi/Ecommerce.API/issues"
+    "url": "https://github.com/davidcicconi/av-patient-manager.api/issues"
   },
-  "homepage": "https://github.com/davidcicconi/Ecommerce.API#readme",
+  "homepage": "https://github.com/davidcicconi/av-patient-manager.api#readme",
   "dependencies": {
     "@types/joi": "^17.2.2",
     "bcrypt": "^6.0.0",
@@ -31,14 +31,19 @@
     "helmet": "^8.1.0",
     "joi": "^18.0.2",
     "jsonwebtoken": "^9.0.3",
-    "morgan": "^1.10.1",
+    "morgan": "^1.11.0",
+    "reflect-metadata": "^0.2.2",
     "swagger-ui-express": "^5.0.1",
-    "tsoa": "^7.0.0-alpha.0"
+    "tsoa": "^7.0.0-alpha.0",
+    "tsyringe": "^4.10.0",
+    "typeorm": "^1.1.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/morgan": "^1.9.10",
     "@types/node": "^25.3.0",
     "@types/swagger-ui-express": "^4.1.8",
     "@typescript-eslint/eslint-plugin": "^8.56.0",
