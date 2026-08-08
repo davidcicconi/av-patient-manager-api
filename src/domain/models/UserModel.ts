@@ -1,4 +1,4 @@
-export class User {
+export class UserModel {
   constructor(
     public id: number | null,
     public firstName: string,
@@ -7,6 +7,7 @@ export class User {
     public password: string,
     public createdAt?: Date,
     public updatedAt?: Date,
+    public roleId?: number,
   ) {}
 
   changeEmail(email: string): void {

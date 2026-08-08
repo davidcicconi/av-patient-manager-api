@@ -1,13 +1,6 @@
-import { User } from "../../models/User";
+import { IGenericRepository } from "./IGenericRepository";
+import { UserModel } from "../../models/UserModel";
 
-export interface IUserRepository {
-  create(user: User): Promise<User>;
-
-  findAll(): Promise<User[]>;
-
-  findById(id: number): Promise<User | null>;
-
-  update(user: User): Promise<User>;
-
-  delete(id: number): Promise<void>;
+export interface IUserRepository extends IGenericRepository<UserModel> {
+  findByEmail(email: string): Promise<UserModel | null>;
 }

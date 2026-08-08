@@ -5,6 +5,9 @@ import "reflect-metadata";
 import fs from "fs";
 import "dotenv/config";
 
+import "./infrastructure/DI/container";
+import { AppDataSource } from "./infrastructure/database/datasource";
+
 const app = express();
 const workspaceRoot = process.cwd();
 const swaggerCandidates = [
@@ -45,8 +48,17 @@ if (fs.existsSync(swaggerFile)) {
   console.warn('Run "npm run tsoa" to generate the Swagger file.');
 }
 
-app.listen(process.env.PORT || 3001, () => {
-  console.log(
-    `Servidor corriendo en http://localhost:${process.env.PORT || 3001}`,
-  );
-});
+AppDataSource.initialize()
+  .then(() => {
+    console.log("Conexión a la base de datos establecida.");
+
+    app.listen(process.env.PORT || 3001, () => {
+      console.log(
+        `Servidor corriendo en http://localhost:${process.env.PORT || 3001}`,
+      );
+    });
+  })
+  .catch((error) => {
+    console.error("Error al conectar con la base de datos:", error);
+    process.exit(1);
+  });

@@ -25,6 +25,9 @@ export class UserEntity {
   @Column()
   password!: string;
 
+  @Column({ type: "int", nullable: true })
+  roleId!: number | null;
+
   @CreateDateColumn()
   createdAt!: Date;
 

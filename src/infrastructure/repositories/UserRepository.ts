@@ -1,28 +1,45 @@
-import { injectable } from "tsyringe";
+import { inject, injectable } from "tsyringe";
+import { DataSource } from "typeorm";
 
-import { User } from "../../domain/models/User";
+import { UserModel } from "../../domain/models/UserModel";
 import { IUserRepository } from "../../domain/interfaces/repositories/IUserRepository";
+import { UserEntity } from "../database/entities/UserEntity";
+import { GenericRepository } from "./GenericRepository";
 
 @injectable()
-export class UserRepository implements IUserRepository {
-  async create(user: User): Promise<User> {
-    // TypeORM
-    throw new Error("Not implemented.");
+export class UserRepository extends GenericRepository<UserModel, UserEntity> implements IUserRepository {
+  constructor(@inject("DataSource") dataSource: DataSource) {
+    super(dataSource, UserEntity);
   }
 
-  async findAll(): Promise<User[]> {
-    throw new Error("Not implemented.");
+  protected toDomain(entity: UserEntity): UserModel {
+    return new UserModel(
+      entity.id,
+      entity.firstName,
+      entity.lastName,
+      entity.email,
+      entity.password,
+      entity.createdAt,
+      entity.updatedAt,
+      entity.roleId ?? undefined,
+    );
   }
 
-  async findById(id: number): Promise<User | null> {
-    throw new Error("Not implemented.");
+  protected toEntity(model: UserModel): UserEntity {
+    const entity = new UserEntity();
+    if (model.id !== null) {
+      entity.id = model.id;
+    }
+    entity.firstName = model.firstName;
+    entity.lastName = model.lastName;
+    entity.email = model.email;
+    entity.password = model.password;
+    entity.roleId = model.roleId ?? null;
+    return entity;
   }
 
-  async update(user: User): Promise<User> {
-    throw new Error("Not implemented.");
-  }
-
-  async delete(id: number): Promise<void> {
-    throw new Error("Not implemented.");
+  async findByEmail(email: string): Promise<UserModel | null> {
+    const entity = await this.repository.findOneBy({ email });
+    return entity ? this.toDomain(entity) : null;
   }
 }
