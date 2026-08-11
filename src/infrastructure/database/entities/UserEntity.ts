@@ -9,13 +9,13 @@ import {
 } from "typeorm";
 import { RoleEntity } from "./RoleEntity";
 
-@Entity("users")
+@Entity("user")
 export class UserEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Column()
-  firstName!: string;
+  name!: string;
 
   @Column()
   lastName!: string;
@@ -26,7 +26,7 @@ export class UserEntity {
   email!: string;
 
   @Column()
-  password!: string;
+  hashPassword!: string;
 
   @Column({ type: "int", nullable: true })
   roleId!: number | null;
