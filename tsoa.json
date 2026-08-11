@@ -1,12 +1,13 @@
 {
-  "entryFile": "src/server.ts",
+  "entryFile": "src/app.ts",
   "noImplicitAdditionalProperties": "throw-on-extras",
-  "controllerPathGlobs": ["src/controllers/*.ts"],
+  "controllerPathGlobs": ["src/presentation/controllers/**/*.ts"],
   "spec": {
     "outputDirectory": "src/build",
     "outputFormat": "json",
     "specFileBaseName": "swagger",
-    "specVersion": 3
+    "specVersion": 3,
+    "title": "AV Patient Manager API"
   },
   "routes": {
     "routesDir": "src/build"

@@ -10,43 +10,14 @@
 		"securitySchemes": {}
 	},
 	"info": {
-		"title": "ecommerce.api",
+		"title": "av-patient-manager-api",
 		"version": "1.0.0",
 		"license": {
 			"name": "ISC"
 		},
 		"contact": {}
 	},
-	"paths": {
-		"/health": {
-			"get": {
-				"operationId": "GetHealth",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"properties": {
-										"status": {
-											"type": "string"
-										}
-									},
-									"required": [
-										"status"
-									],
-									"type": "object"
-								}
-							}
-						}
-					}
-				},
-				"description": "Returns health status",
-				"security": [],
-				"parameters": []
-			}
-		}
-	},
+	"paths": {},
 	"servers": [
 		{
 			"url": "/"

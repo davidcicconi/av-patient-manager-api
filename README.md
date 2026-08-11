@@ -30,7 +30,11 @@ Arquitectura familiarizada por Robert C. Martin. Es una forma de organizar nuest
 
 <br>
 
+## Arquitectura de carpetas
+
 src/
+│
+├── build/routes.ts #Contiene la generación de rutas por TSOA
 │
 ├── domain/ # Reglas de negocio (núcleo)
 │ ├── entities/
@@ -102,3 +106,17 @@ src/
 │
 ├── app.ts # Configuración de Express
 └── server.ts # Inicio del servidor
+
+## Flujo de datos en la Request
+
+Route
+↓
+Controller
+↓
+UseCase
+↓
+Repository (interface)
+↓
+Repository (implementación)
+↓
+Base de datos

@@ -1,15 +1,22 @@
 import express from "express";
-import path, { dirname } from "path";
+import path from "path";
 import swaggerUi from "swagger-ui-express";
+import "reflect-metadata";
 import fs from "fs";
 import "dotenv/config";
 
-import { fileURLToPath } from "url";
+import "./infrastructure/DI/container";
+import { AppDataSource } from "./infrastructure/database/datasource";
 
 const app = express();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const swaggerFile = path.join(__dirname, "build/swagger.json");
+const workspaceRoot = process.cwd();
+const swaggerCandidates = [
+  path.join(workspaceRoot, "src", "build", "swagger.json"),
+  path.join(workspaceRoot, "dist", "build", "swagger.json"),
+];
+const swaggerFile =
+  swaggerCandidates.find((candidate) => fs.existsSync(candidate)) ??
+  path.join(workspaceRoot, "src", "build", "swagger.json");
 
 // Middlewares
 app.use(express.json());
@@ -41,8 +48,18 @@ if (fs.existsSync(swaggerFile)) {
   console.warn('Run "npm run tsoa" to generate the Swagger file.');
 }
 
-app.listen(process.env.PORT || 3001, () => {
-  console.log(
-    `Servidor corriendo en http://localhost:${process.env.PORT || 3001}`,
-  );
-});
+AppDataSource.initialize()
+  .then(() => {
+    console.log("Conexión a la base de datos establecida.");
+
+    app.listen(process.env.PORT || 3001, () => {
+      console.log(
+        `Servidor corriendo en http://localhost:${process.env.PORT || 3001}`,
+      );
+    });
+  })
+  .catch((error) => {
+    console.error("Error al conectar con la base de datos:");
+    console.error(error.stack || error);
+    process.exit(1);
+  });
