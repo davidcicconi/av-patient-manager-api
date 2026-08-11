@@ -14,5 +14,11 @@
     "resolveJsonModule": true
   },
   "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.json"],
-  "exclude": ["node_modules", "dist", "src/build"]
+  "exclude": ["node_modules", "dist", "src/build"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS",
+      "moduleResolution": "node"
+    }
+  }
 }

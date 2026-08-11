@@ -7,8 +7,13 @@
     "build": "tsc",
     "build:tsoa": "tsc && tsoa spec-and-routes",
     "tsoa": "tsoa spec && tsoa routes",
-    "start": "nodemon --watch src --ext ts --exec ts-node src/server.ts",
-    "dev": "concurrently -k -p \"[{name}]\" -n \"TS,Node\" -c \"magenta,green\" \"tsoa spec-and-routes && tsc -w\" \"nodemon --inspect=9229 dist/server.js\""
+    "start": "nodemon --watch src --ext ts --exec \"node --inspect=9229 -r ts-node/register\" src/server.ts",
+    "dev": "tsoa spec-and-routes && nodemon --watch src --ext ts --exec \"node --inspect=9229 -r ts-node/register\" src/server.ts",
+    "typeorm": "ts-node -r reflect-metadata ./node_modules/typeorm/cli.js -d src/infrastructure/database/datasource.ts",
+    "migration:run": "npm run typeorm -- migration:run",
+    "migration:revert": "npm run typeorm -- migration:revert",
+    "migration:generate": "npm run typeorm -- migration:generate",
+    "migration:create": "typeorm migration:create"
   },
   "repository": {
     "type": "git",
@@ -26,7 +31,7 @@
     "@types/joi": "^17.2.2",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
-    "dotenv": "^17.3.1",
+    "dotenv": "^16.6.1",
     "express": "^5.2.1",
     "helmet": "^8.1.0",
     "joi": "^18.0.2",

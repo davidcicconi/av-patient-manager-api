@@ -59,6 +59,7 @@ AppDataSource.initialize()
     });
   })
   .catch((error) => {
-    console.error("Error al conectar con la base de datos:", error);
+    console.error("Error al conectar con la base de datos:");
+    console.error(error.stack || error);
     process.exit(1);
   });
