@@ -12,9 +12,9 @@ export class LoginUseCase {
   async execute(email: string, password: string) {
     const user = await this.userRepository.findByEmail(email);
 
-    if (!user) throw new Error("Invalid credentials");
+    if (!user) throw new Error("Invalid user");
 
-    const valid = await this.passwordHasher.compare(password, user.password);
+    const valid = await this.passwordHasher.compare(password, user.hashPassword);
 
     if (!valid) throw new Error("Invalid password");
 

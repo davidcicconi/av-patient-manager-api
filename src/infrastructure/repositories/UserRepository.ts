@@ -15,10 +15,10 @@ export class UserRepository extends GenericRepository<UserModel, UserEntity> imp
   protected toDomain(entity: UserEntity): UserModel {
     return new UserModel(
       entity.id,
-      entity.firstName,
+      entity.name,
       entity.lastName,
       entity.email,
-      entity.password,
+      entity.hashPassword,
       entity.createdAt,
       entity.updatedAt,
       entity.roleId ?? undefined,
@@ -30,10 +30,10 @@ export class UserRepository extends GenericRepository<UserModel, UserEntity> imp
     if (model.id !== null) {
       entity.id = model.id;
     }
-    entity.firstName = model.firstName;
+    entity.name = model.name;
     entity.lastName = model.lastName;
     entity.email = model.email;
-    entity.password = model.password;
+    entity.hashPassword = model.hashPassword;
     entity.roleId = model.roleId ?? null;
     return entity;
   }
