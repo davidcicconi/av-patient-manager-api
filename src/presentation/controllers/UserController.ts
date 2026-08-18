@@ -1,4 +1,4 @@
-import { Controller, Post, Route, Tags } from "tsoa";
+import { Controller, Route, Tags } from "tsoa";
 
 @Route("users")
 @Tags("Users")

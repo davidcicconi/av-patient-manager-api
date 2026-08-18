@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import { BaseError } from '../BaseError';
 import { ValidateError } from 'tsoa';
 
@@ -6,7 +6,7 @@ interface ValidationErrorResponse {
     error: string;
     message: string;
     details: {
-        validationErrors: Record<string, any>;
+        validationErrors: Record<string, string[]>;
         requestPath: string;
         timestamp: string;
     };
@@ -27,7 +27,6 @@ export function errorMiddleware(
     err: unknown,
     req: Request,
     res: Response,
-    next: NextFunction,
 ): Response {
     const timestamp = new Date().toISOString();
 

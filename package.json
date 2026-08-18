@@ -16,7 +16,8 @@
     "migration:create": "typeorm migration:create",
     "seed:role": "ts-node -r reflect-metadata src/infrastructure/database/seeds/role.seed.ts",
     "seed:admin": "ts-node -r reflect-metadata src/infrastructure/database/seeds/admin.seed.ts",
-    "seed:all": "ts-node -r reflect-metadata src/infrastructure/database/seeds/seedAll.ts"
+    "seed:all": "ts-node -r reflect-metadata src/infrastructure/database/seeds/seedAll.ts",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
