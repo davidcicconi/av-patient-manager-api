@@ -4,7 +4,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 import { RegisterRoutes } from "./build/routes";
-import { errorHandler } from "./infrastructure/middlewares/errorHandler";
+import { errorMiddleware } from "./shared/errors/middleware/ErrorMiddleware";
 
 const app = express();
 
@@ -20,6 +20,6 @@ app.use(express.urlencoded({ extended: true }));
 RegisterRoutes(app);
 
 // Middleware de errores (siempre al final)
-app.use(errorHandler);
+app.use(errorMiddleware);
 
 export default app;

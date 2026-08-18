@@ -1,10 +1,10 @@
 export class UserModel {
   constructor(
-    public id: number | null,
-    public firstName: string,
+    public id: number,
+    public name: string,
     public lastName: string,
     public email: string,
-    public password: string,
+    public hashPassword: string,
     public createdAt?: Date,
     public updatedAt?: Date,
     public roleId?: number,
@@ -15,6 +15,6 @@ export class UserModel {
   }
 
   changePassword(password: string): void {
-    this.password = password;
+    this.hashPassword = password;
   }
 }

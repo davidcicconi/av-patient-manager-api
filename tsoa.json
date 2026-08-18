@@ -10,6 +10,7 @@
     "title": "AV Patient Manager API"
   },
   "routes": {
-    "routesDir": "src/build"
+    "routesDir": "src/build",
+    "iocModule": "src/infrastructure/DI/container.ts"
   }
 }
