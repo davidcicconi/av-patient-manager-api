@@ -6,7 +6,71 @@
 		"parameters": {},
 		"requestBodies": {},
 		"responses": {},
-		"schemas": {},
+		"schemas": {
+			"AuthenticatedUser": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"email": {
+						"type": "string"
+					},
+					"roleId": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"id",
+					"email",
+					"roleId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"LoginResponseDTO": {
+				"properties": {
+					"user": {
+						"$ref": "#/components/schemas/AuthenticatedUser"
+					},
+					"token": {
+						"type": "string"
+					},
+					"refreshToken": {
+						"type": "string"
+					},
+					"expiresIn": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"user",
+					"token",
+					"refreshToken",
+					"expiresIn"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"LoginRequestDto": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
 		"securitySchemes": {}
 	},
 	"info": {
@@ -17,7 +81,46 @@
 		},
 		"contact": {}
 	},
-	"paths": {},
+	"paths": {
+		"/auth/login": {
+			"post": {
+				"operationId": "Login",
+				"responses": {
+					"200": {
+						"description": "Login successful",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/LoginResponseDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request - Invalid input"
+					},
+					"401": {
+						"description": "Unauthorized - Invalid credentials"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/LoginRequestDto"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
 	"servers": [
 		{
 			"url": "/"

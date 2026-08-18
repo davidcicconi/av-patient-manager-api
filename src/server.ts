@@ -1,4 +1,3 @@
-import express from "express";
 import path from "path";
 import swaggerUi from "swagger-ui-express";
 import "reflect-metadata";
@@ -7,8 +6,8 @@ import "dotenv/config";
 
 import "./infrastructure/DI/container";
 import { AppDataSource } from "./infrastructure/database/datasource";
+import app from "./app";
 
-const app = express();
 const workspaceRoot = process.cwd();
 const swaggerCandidates = [
   path.join(workspaceRoot, "src", "build", "swagger.json"),
@@ -17,10 +16,6 @@ const swaggerCandidates = [
 const swaggerFile =
   swaggerCandidates.find((candidate) => fs.existsSync(candidate)) ??
   path.join(workspaceRoot, "src", "build", "swagger.json");
-
-// Middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 if (fs.existsSync(swaggerFile)) {
   const swaggerDocument = JSON.parse(fs.readFileSync(swaggerFile, "utf8"));

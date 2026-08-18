@@ -1,6 +1,6 @@
 export class UserModel {
   constructor(
-    public id: number | null,
+    public id: number,
     public name: string,
     public lastName: string,
     public email: string,

@@ -4,6 +4,7 @@ import { DataSource } from "typeorm";
 import { UserModel } from "../../domain/models/UserModel";
 import { IUserRepository } from "../../domain/interfaces/repositories/IUserRepository";
 import { UserEntity } from "../database/entities/UserEntity";
+import { UserMapper } from "../../application/mappers/UserMapper";
 import { GenericRepository } from "./GenericRepository";
 
 @injectable()
@@ -13,33 +14,15 @@ export class UserRepository extends GenericRepository<UserModel, UserEntity> imp
   }
 
   protected toDomain(entity: UserEntity): UserModel {
-    return new UserModel(
-      entity.id,
-      entity.name,
-      entity.lastName,
-      entity.email,
-      entity.hashPassword,
-      entity.createdAt,
-      entity.updatedAt,
-      entity.roleId ?? undefined,
-    );
+    return UserMapper.toDomain(entity);
   }
 
   protected toEntity(model: UserModel): UserEntity {
-    const entity = new UserEntity();
-    if (model.id !== null) {
-      entity.id = model.id;
-    }
-    entity.name = model.name;
-    entity.lastName = model.lastName;
-    entity.email = model.email;
-    entity.hashPassword = model.hashPassword;
-    entity.roleId = model.roleId ?? null;
-    return entity;
+    return UserMapper.toEntity(model);
   }
 
   async findByEmail(email: string): Promise<UserModel | null> {
     const entity = await this.repository.findOneBy({ email });
-    return entity ? this.toDomain(entity) : null;
+    return entity ? UserMapper.toDomain(entity) : null;
   }
 }

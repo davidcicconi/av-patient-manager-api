@@ -1,8 +1,9 @@
 import { UserModel } from "../../../domain/models/UserModel";
-import { TokenPayload } from "../../dtos/auth/TokenPayload";
+import { AccessTokenPayload } from "../../dtos/auth/AccessTokenPayload";
 
 export interface ITokenService {
   generateAccessToken(user: UserModel): Promise<string>;
-  generateRefreshToken(user: UserModel): Promise<string>;
-  verify(token: string): Promise<TokenPayload>;
+  generateRefreshToken(userId: number): Promise<string>;
+  verifyAccessToken(token: string): Promise<AccessTokenPayload>;
+  verifyRefreshToken(token: string): { sub: number }
 }
